@@ -10,7 +10,7 @@ This is an idea file, meant to be copy-pasted into your own LLM agent (Claude Co
 
 **Action.** Most LLM-and-apps setups look like a blind agent: read the screen, guess, tap, forget. The agent doesn't know the terrain it's moving through. A five-screen flow is five separate guesses, and tomorrow it's five more. Nothing accumulates.
 
-The two look like different universes — knowledge vs. action, documents vs. apps, RAG vs. browser agents. They have the same shape. **Every session starts at zero.** The bottleneck in knowledge work was never the reading or the thinking; it was the bookkeeping nobody wants to do. The bottleneck in app automation was never the tapping; it was remembering the terrain so the next tap isn't a guess. Humans abandon wikis for the same reason hand-written automations rot: maintenance grows faster than value.
+The two look like different universes — knowledge vs. action, documents vs. apps, RAG vs. browser agents. They have the same shape. **Every session starts at zero**, and the bookkeeping to stop that from being true has always grown faster than the value it produced. That's why humans abandon wikis, and it's why hand-written automations rot.
 
 ## Two fixes, one shape
 
@@ -18,17 +18,11 @@ The two look like different universes — knowledge vs. action, documents vs. ap
 
 **ForrestKim's fix, for action.** The LLM incrementally builds and maintains a persistent map of the app — every screen a node, every action an edge — and updates the graph each time it explores or acts. One exploration pass touches dozens of screens. The route map is a compounding artifact: the agent's next action is no longer a guess, it's a lookup. You pick the app and direct the depth; the LLM does the mapping. The app is the terrain, the LLM is the surveyor, the route map is the agent's map.
 
-Same shape. Same division of labor. Same reason it finally works: **the LLM doesn't get bored, and meaning-based identifiers don't rot.** A wiki entity called `Acme Inc` is still `Acme Inc` next month. A button called `BUTTON:Save` is still `BUTTON:Save` after an A/B test. Both halves of the workspace sit on the same substrate.
+Same shape. Same division of labor. Same reason it finally works: **the LLM doesn't get bored, and meaning-based identifiers don't rot.**
 
 ## The synthesis
 
 Karpathy gave the brain a compounding artifact. ForrestKim gave the hands the same thing. Put both under one roof and a third thing falls out for free: **context travels between the layers without anyone shipping it.** The moment you start a project about negotiating with a partner company, the LLM already knows who works there (wiki), how to drive the tools you'll use to reach them (app memory), and where the negotiation currently stands (project). No re-explaining, no re-uploading, no re-indexing. Every new move is informed by everything that came before.
-
-This is the move: **a single workspace where brain, eyes, and hands all live, each in its own layer, each with its own lifetime.**
-
-- **Brain** answers *who and what do you know?* It grows over months and years and never really shrinks.
-- **Eyes and hands** answer *how does the agent move through the apps you use?* Each app is a unit, alive as long as the app is.
-- **Work** answers *what are we doing right now?* Fast, ephemeral, self-archiving.
 
 You rarely write any of it yourself. The LLM writes the wiki pages as you feed it sources. The LLM writes the ROUTES and TRANSITIONS as it explores apps. You sketch a project and the LLM fills in the rest. In practice, I keep a single Claude Code session open with the workspace as its working directory, and the three layers rotate under one conversation: one turn updates an entity page, the next adds a transition to an app's memory, the next edits a plan inside a project and cites both as it goes. One session, three layers, no context switching.
 
@@ -55,11 +49,11 @@ app-memory   → TYPE:Label          (e.g. BUTTON:Save, INPUT:Email, TAB:Home)
 projects     → phase / task id     (e.g. phase-02, task-02-03)
 ```
 
-Same state, same ID — regardless of session, screen resolution, UI layout, or time of day. In the wiki you write `[[Acme Inc]]` from any page and never think about paths. In the app memory you plan a five-screen flow as a flat sequence — `tap BUTTON:Confirm`, `tap BUTTON:Continue`, `tap BUTTON:Done` — with no intermediate reads and no guessing. In projects, a task keeps its ID across restarts, so plans survive context resets. This is the substrate the rest of the workspace sits on.
+Same state, same ID — regardless of session, screen resolution, UI layout, or time of day. A wiki entity called `Acme Inc` is still `Acme Inc` next month. A button called `BUTTON:Save` is still `BUTTON:Save` after an A/B test. In the wiki you write `[[Acme Inc]]` from any page and never think about paths. In the app memory you plan a five-screen flow as a flat sequence — `tap BUTTON:Confirm`, `tap BUTTON:Continue`, `tap BUTTON:Done` — with no intermediate reads and no guessing. In projects, a task keeps its ID across restarts, so plans survive context resets. This is the substrate the rest of the workspace sits on.
 
-## Three rules the workspace falls apart without
+## Three additions
 
-Three additions that aren't in either original, and that the whole thing collapses without.
+Three rules that aren't in either original, and that the whole thing collapses without.
 
 **Relationships are first-class. Entities never link directly.** When two people are related, both are linked from a *context page* that describes the relationship. "Alice knows Bob" carries almost no information; "Alice and Bob co-lead the strategy unit at Acme and make top-level product decisions together" carries a lot. The context page holds the latter. No entity ever turns into a link-hub that collapses under its own inbound weight. This is a direct extension of Karpathy's graph.
 
@@ -95,7 +89,7 @@ Tools are scaffolding around an LLM that does the actual judgment. Swap any of t
 
 *Action's bottleneck was memory.* Humans and agents alike forget which screens they visited, which buttons they tried, which flows the last UI update broke. Meaning-based identifiers survive layout changes, resolution changes, and A/B tests; an LLM that writes down every screen it sees doesn't forget them next session. **The app map stays alive for the first time, and it compounds.** (That's ForrestKim's argument, lifted.)
 
-Both halves are the same fix: a permanent, meaning-based, compounding artifact that an LLM maintains and a human curates. Put both under one roof and the third thing follows for free — **context travels between the layers without anyone shipping it.** Start a project, and the LLM already knows the people, the tools, and the state. Every move is informed by everything that came before.
+Both halves are the same fix: a permanent, meaning-based, compounding artifact that an LLM maintains and a human curates. Put them under one roof and context travels between the layers for free.
 
 The human's job is to curate sources, direct the exploration, decide which projects matter, and think about what it all means. The LLM's job is everything else.
 
@@ -105,7 +99,7 @@ Vannevar Bush drew the Memex in 1945 — a personal, curated store with associat
 
 Bush's picture had a second gap, one he didn't even think to ask about. The Memex only ever described what its operator *knew*, never how the operator *moved through the world*. Brain without eyes and hands is half a Memex. ForrestKim's pattern is the other half — and it has the same answer to the maintenance question. The LLM draws the map, updates the trails, and keeps both alive.
 
-This workspace is the two halves under one roof.
+This is the Memex, finished.
 
 ## Note
 
