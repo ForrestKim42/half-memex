@@ -38,15 +38,15 @@ There are three layers, plus a schema that ties them together.
 Every layer uses stable, meaning-based identifiers. None of them rely on coordinates, list positions, or indexes.
 
 ```
-wiki         → entity name        (e.g. "IoTrust", "Kim Seontae")
+wiki         → entity name        (e.g. "Acme Inc", "Jane Doe")
                = filename = H1 title
 app-memory   → TYPE:Label          (e.g. BUTTON:Save, INPUT:Email, TAB:Home)
 projects     → phase / task id     (e.g. phase-02, task-02-03)
 ```
 
-Same state, same ID — regardless of session, screen resolution, UI layout, or time of day. This is what makes the rest of the workspace possible. In the wiki you can write `[[IoTrust]]` from any page and not think about paths. In the app memory you can plan a five-screen flow as a flat sequence — `tap BUTTON:Confirm`, `tap BUTTON:Continue`, `tap BUTTON:Done` — with no intermediate reads and no guessing. In projects, a task keeps its ID across restarts, so plans survive context resets.
+Same state, same ID — regardless of session, screen resolution, UI layout, or time of day. This is what makes the rest of the workspace possible. In the wiki you can write `[[Acme Inc]]` from any page and not think about paths. In the app memory you can plan a five-screen flow as a flat sequence — `tap BUTTON:Confirm`, `tap BUTTON:Continue`, `tap BUTTON:Done` — with no intermediate reads and no guessing. In projects, a task keeps its ID across restarts, so plans survive context resets.
 
-The wiki takes this one step past Karpathy's original. Entities never link to each other directly. When two people are related, both are linked from a **context page** that describes the relationship. "Kim Seontae knows Byun Sangmin" carries almost no information; "Kim Seontae and Byun Sangmin co-lead the strategy unit of Forest Crew and make top-level product decisions together" carries a lot. The context page holds the latter. Relationships become first-class citizens, and no entity ever turns into a link-hub that collapses under its own inbound weight.
+The wiki takes this one step past Karpathy's original. Entities never link to each other directly. When two people are related, both are linked from a **context page** that describes the relationship. "Alice knows Bob" carries almost no information; "Alice and Bob co-lead the strategy unit at Acme and make top-level product decisions together" carries a lot. The context page holds the latter. Relationships become first-class citizens, and no entity ever turns into a link-hub that collapses under its own inbound weight.
 
 ## Operations
 
